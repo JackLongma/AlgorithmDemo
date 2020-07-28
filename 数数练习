@@ -1,0 +1,71 @@
+题目描述
+									
+爸爸教2岁的宝宝练习数数，将n 个玩具排成一行。所有玩具从左到右编号为 1 到 n。宝宝从左到右开始数数，当编号为 n 的玩具数完 n 之后，接着从右往左数，即编号为n-1 的玩具数 n+1，然后编号为 n-2 的玩具数 n+2，以此类推。当编号为1的玩具数完之后，方向又变成从左到右，依次类推。
+
+为了鼓励宝宝坚持数数，每当宝宝数到7 或者包含7、还有7 的倍数时，爸爸会竖起大拇指以示鼓励。下表是 n=4 的数数情况（X 表示爸爸竖起大拇指）。当编号为 3 的玩具遇到爸爸第3次竖起大拇指的时候，宝宝实际上数到了 27。
+
+玩具    1    2    3    4    3    2    1    2    3    4    3    2    1    2   3    4    3   2    1    2    3    4    3    2    1    2    3
+
+数数    1    2    3    4    5    6    X    8    9   10  11  12  13   X   15  16  X   18  19  20   X  22  23  24  25  26   X
+
+给定 n，m 和 k，你的任务是计算当编号为 m 的玩具遇到爸爸第 k 次竖起大拇指时，宝宝实际上数到了几。
+
+package com.test; 
+    import java.util.Scanner; 
+    public class Main {     
+        //下面的函数验证数字x是否能被7整除，或者是否含有7
+        public boolean hanyou(int x)     {         
+            boolean h=false;         
+            while(x>0)         {           
+                if(x%10==7){ 
+                    h=true; 
+                    break;
+                }           
+                x/=10;         
+                return h;     
+            } 
+        public static void main(String []args) {     
+                Scanner in=new Scanner(System.in);     
+                int n=in.nextInt();//输入n
+                int m=in.nextInt();//输入m     
+                int k=in.nextInt();//输入k     
+                Main mn=new Main();   
+                while(!(n==0&&m==0&&k==0))//循环输入     
+                {     
+                    int direction=1;//表示方向，也就是数列{1,2,3,4...n-1,n,n-1...4,3,2,1,2,3....}中下一个数字改增序还是降序     
+                    int i=0;//累加变量，表示遇到了第i次的（关于7的并且对应数列为m的数）     
+                    int realsum=0;//真实的数数     
+                    int innern=0;//内部数列{1,2,3,4...n-1,n,n-1...4,3,2,1,2,3....}的值     
+                    while(i<k)     {            
+                        realsum++;            
+                        if(direction==1)innern++;            
+                        if(direction==-1)innern--;            
+                        if(innern>=n)direction=-1;            
+                        if(innern<=1)direction =1;            
+                        if((realsum%7==0&&innern==m)||(mn.hanyou(realsum)&&innern==m))                
+                            i++;                 
+                    }     
+                    System.out.println(realsum);//输出真正的次数      
+                    n=in.nextInt();//循环输入      
+                    m=in.nextInt();      
+                    k=in.nextInt();     
+                } 
+            }      
+        }
+    }
+
+输入
+输入包含不超过 10 组数据。每组数据占一行，包含三个整数 n，m 和 k（2<=n<=100, 1<=m<=n, 1<=k<=100）。输入结束标志为 n=m=k=0。
+样例输入
+4 2 1
+4 3 2
+5 3 2
+6 3 2
+0 0 0 
+输出
+对于每组数据，输出一行，即编号为 m 的玩具遇到爸爸第 k 次竖起大拇指时，宝宝实际上数到了的那个整数。
+样例输出
+14
+21
+27
+63
