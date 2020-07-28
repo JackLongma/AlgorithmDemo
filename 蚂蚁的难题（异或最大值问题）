@@ -1,0 +1,51 @@
+描述
+小蚂蚁童鞋最近迷上了位运算，他感觉位运算非常神奇。不过他最近遇到了一个难题：
+
+给定一个区间[a,b],在区间里寻找两个数x和y，使得x异或y最大。来，帮帮他吧！
+
+输入
+有多组测试数据（以EOF结尾）。
+每组数据输入两个数a,b.(0<=a<b<2^63)
+输出
+输出a到b之间，异或最大的值。
+样例输入
+1 2
+8 9
+样例输出
+3
+1
+
+代码：
+
+package com.test.yh;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args)
+    {
+        Scanner in =new Scanner(System.in);
+        int a=in.nextInt(),b=in.nextInt();
+         while(a>=0&&b>=0)
+         {
+             int yh=0;
+             for(int i=a;i<b;i++)
+             {
+                 for(int j=i;j<=b;j++)
+                 {
+                    if(yh<(i^j))
+                        yh=i^j;
+                    
+                 }
+             }
+             System.out.println(yh);
+             
+             
+             
+             
+             a=in.nextInt();
+             b=in.nextInt();
+         }
+    }
+
+}
