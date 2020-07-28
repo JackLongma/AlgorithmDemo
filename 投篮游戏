@@ -1,0 +1,50 @@
+投篮游戏
+
+题目描述
+小赛最近迷上了篮球，报名参加一个投篮游戏。球场有p个篮筐，编号为0, 1, ..., p-1，每个篮筐下面有个袋子，每个袋子最多能装入一个篮球。现在有n个篮球，第i个篮球有一个数字xi，投篮规则是将数字为xi的篮球，投入篮筐编号为xi除以p所得的余数。如果袋子里面已经有球，那么篮球就会弹出，投篮游戏结束，输出i；否则重复进行将篮球投完，游戏结束，输出-1。问小赛会在何时结束游戏？
+
+package com.test.toulan; 
+import java.util.Scanner; 
+public class Main {   
+  public int fun(int[]pa,int []a,int p)     {  
+         int s=0;        
+          for(int i=0;i<a.length;i++)         {   
+                    if(pa[a[i]%p]==0)     {            
+                         s++;                 
+                         pa[a[i]%p]=1;                 
+                     } else                 
+                      break;                                           
+           }         
+           return ++s;     
+ }     
+ public static void main(String [] args)     {        
+   Scanner in=new Scanner (System.in);       
+     int p=in.nextInt();        
+      int [] pa=new int[p];         
+      for(int i=0;i<p;i++)         {             
+         pa[i]=0;         
+      }         
+      int n=in.nextInt();         
+      int [] a=new int [n];         
+      for(int i=0;i<n;i++)             
+      a[i]=in.nextInt();         
+      Main mn=new Main();         
+      System.out.println(mn.fun(pa, a, p));                  
+ } 
+}
+
+输入
+第一行数据是两个整数：p, n (2≤p,n≤300)，p表示篮筐数目，n表示篮球数目。接着n行数据表示篮球上的数字xi (0≤xi≤109)。
+样例输入
+10 5
+0
+21
+53
+41
+53
+ 
+输出
+输出投篮游戏结束时输出结果。
+ 
+样例输出
+4
