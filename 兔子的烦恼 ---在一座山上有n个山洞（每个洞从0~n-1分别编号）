@@ -1,0 +1,66 @@
+描述
+在一座山上有n个山洞（每个洞从0~n-1分别编号），这山上有一只兔子躲在山洞里，有一只狼，从编号为0的山洞开始入洞，每隔m-1个洞，再次入洞抓兔子，现在兔子想知道是否有能避免这场灾难的山洞？
+
+例如：m=2 and n=6, 狼将要进入的山洞号为：0,2,4，可避难的山洞为：1,3,5;
+
+输入
+有多组测试数据，不超过11组;
+每组有两个整数m,n(0<m,n<=10000000);
+注意：程序以文件结束符“EOF”结束输入。
+输出
+兔子能避免这场灾难输出可避难山洞的总数和所有可避难山洞的编号（从小到大输出），否则输出NO;
+样例输入
+1 22 2
+样例输出
+NO1 1
+
+代码：
+
+package com.test.tuzi;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        int n=in.nextInt();
+        int m=in.nextInt();
+        while(n!=0&&m!=0)
+        {
+            int[] aa=new int[2*n];
+            for(int i=0;i<n;i++)
+            {
+                aa[i]=i;    
+            }
+            for(int i=n;i<2*n;i++)
+            {
+                aa[i]=-1;
+            }
+            for(int i=0;i>n||aa[i]!=-1;)
+            {
+                if(i>n) i=i-n;
+                else
+                {
+                    aa[i]=-1;
+                    i+=m;
+                }    
+            }
+            boolean you=false;
+            for(int i=0;i<n;i++)
+            {
+                if(aa[i]!=-1)
+                { you=true;break;}
+            }
+            for(int i=0;i<n;i++)    
+            {
+            if(aa[i]!=-1)
+                System.out.println(i);
+            }
+            if(you==false)
+            {
+                System.out.println("NO");
+            }
+            n=in.nextInt();
+            m=in.nextInt();
+        }
+    }
+}
+
