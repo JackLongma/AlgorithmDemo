@@ -1,0 +1,55 @@
+描述
+阶乘(Factorial)是一个很有意思的函数，但是不少人都比较怕它。现在这里有一个问题，给定一个N(0<0<1000000000)，求N!的二进制表示最低位的1的位置(从右向左数)。
+
+输入
+本题有多组测试数据，每组数据一个正整数N(0<0<1000000000)，以EOF结束
+输出
+求N!的二进制表示最低位的1的位置(从右向左数)。一组数据占一行。
+样例输入
+1
+2
+3
+4
+样例输出
+1
+2
+2
+4
+
+代码：
+
+package com.test.zhaoyi;
+
+import java.util.Scanner;
+
+public class Main {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner in =new Scanner(System.in);
+        int n=in.nextInt();
+        while(n!=-10000000)
+        {
+            int njc=n;
+            for(int i=n-1;i>=1;i--)
+            {
+                njc*=i;
+            }
+            int w=0;
+            while((njc&1)==0)
+            {
+                njc/=2;
+                w++;
+                
+            }
+            
+            System.out.println(w+1);
+            n=in.nextInt();
+        }
+
+    }
+
+}
