@@ -1,0 +1,73 @@
+描述
+    我们定义 F（x）是满足 x  mod（a*b） == 0这样a，b的组数。现在给你一个n，你需要求出sum = F(1) + F(2) + F(3) + …… + F（n）。
+输入
+有多组测试数据。
+每组测试数据输入一个整数n （1 <= n <= 10^11）
+输出
+每组测试数据输出 Case x: y ，x 表示第x组测试数据，y表示sum的值
+样例输入
+1
+2
+3
+4
+样例输出
+ Case 1: 1
+Case 2: 4
+Case 3: 7
+Case 4: 13
+
+
+
+代码：
+
+
+package com.test.fx;
+import java.util.Scanner;
+public class Main {
+    public int sum(int [] aa)
+    {  
+        int sumx=0;
+        for(int i=1;i<aa[0];i++)
+        {
+            for(int j=1;j<=aa[i];j++)
+            {
+                for(int g=1;g<=aa[i];g++)
+                {
+                    if(j*g==aa[i])
+                        sumx++;
+                }
+            }
+        }
+        return sumx;
+    }
+    public int[] Zhengchu(int n)
+    {
+        int le=1;int [] aa=new int [10000];
+        for(int i=1;i<=n;i++)
+        {
+            if(n%i==0) {aa[le]=i;le++;}
+        }
+        aa[0]=le;
+        return aa;
+    }
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Main mn=new Main();
+Scanner in =new Scanner (System.in);
+       int n=in.nextInt();
+       while(true)
+       {
+          
+           int [] aa=mn.Zhengchu(n);
+           //System.out.println(mn.sum(aa));
+           int sumlast=0;
+           for(int i=1;i<=n;i++)
+           {
+              sumlast+=mn.sum(mn.Zhengchu(i));
+           }
+           System.out.println("Case"+" n:"+sumlast);
+           n=in.nextInt();
+       }
+    }
+
+}
